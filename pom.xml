@@ -10,15 +10,14 @@
 
     <properties>
         <!-- Java Version -->
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Dependencies version -->
-        <paper.version>1.20.1-R0.1-SNAPSHOT</paper.version>
-        <commandapi.version>11.1.0</commandapi.version>
+        <spigot.version>1.20.1-R0.1-SNAPSHOT</spigot.version>
         <lombok.version>1.18.42</lombok.version>
-        <adventure.version>4.26.1</adventure.version>
+        <adventure.version>4.15.0</adventure.version>
 
         <!-- Plguins Version -->
         <compiler.version>3.14.0</compiler.version>
@@ -44,24 +43,10 @@
     <dependencies>
         <!-- Paper API -->
         <dependency>
-            <groupId>io.papermc.paper</groupId>
-            <artifactId>paper-api</artifactId>
-            <version>${paper.version}</version>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>${spigot.version}</version>
             <scope>provided</scope>
-        </dependency>
-
-        <!-- CommandAPI -->
-        <dependency>
-            <groupId>dev.jorel</groupId>
-            <artifactId>commandapi-bukkit-core</artifactId>
-            <version>${commandapi.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>dev.jorel</groupId>
-            <artifactId>commandapi-bukkit-shade</artifactId>
-            <version>${commandapi.version}</version>
         </dependency>
 
         <!-- Lombok -->
@@ -82,6 +67,12 @@
             <groupId>net.kyori</groupId>
             <artifactId>adventure-api</artifactId>
             <version>${adventure.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-platform-bukkit</artifactId>
+            <version>4.4.1</version>
         </dependency>
     </dependencies>
 
@@ -123,12 +114,6 @@
                     <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
                     <shadedArtifactAttached>true</shadedArtifactAttached>
                     <minimizeJar>true</minimizeJar>
-                    <relocations>
-                        <relocation>
-                            <pattern>dev.jorel.commandapi</pattern>
-                            <shadedPattern>com.spectrasonic.commandapi</shadedPattern>
-                        </relocation>
-                    </relocations>
                 </configuration>
                 <executions>
                     <execution>
