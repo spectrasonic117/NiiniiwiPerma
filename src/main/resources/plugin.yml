@@ -1,0 +1,8 @@
+name: NiiniiwiPerma
+api: "1.20"
+version: "${version}"
+main: com.spectrasonic.NiiniiwiPerma.Main
+api-version: "1.20"
+authors: [Spectrasonic]
+depends: [CommandAPI]
+
