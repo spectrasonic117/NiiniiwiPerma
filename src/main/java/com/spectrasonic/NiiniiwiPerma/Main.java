@@ -1,5 +1,6 @@
 package com.spectrasonic.NiiniiwiPerma;
 
+import co.aikar.commands.PaperCommandManager;
 import com.spectrasonic.NiiniiwiPerma.managers.CommandManager;
 import com.spectrasonic.NiiniiwiPerma.managers.ConfigManager;
 import com.spectrasonic.NiiniiwiPerma.managers.EventManager;
@@ -17,11 +18,19 @@ public final class Main extends JavaPlugin {
     private ConfigManager configManager;
     private CommandManager commandManager;
     private EventManager eventManager;
+    private PaperCommandManager acfCommandManager;
+
+    public PaperCommandManager getAcfCommandManager() {
+        return acfCommandManager;
+    }
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
         this.configManager = new ConfigManager(this);
+        
+        // Inicializar ACF Command Manager
+        this.acfCommandManager = new PaperCommandManager(this);
         this.commandManager = new CommandManager(this);
         this.eventManager = new EventManager(this);
 

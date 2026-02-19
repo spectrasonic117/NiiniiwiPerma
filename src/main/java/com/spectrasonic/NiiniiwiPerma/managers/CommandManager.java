@@ -1,6 +1,7 @@
 package com.spectrasonic.NiiniiwiPerma.managers;
 
 import com.spectrasonic.NiiniiwiPerma.Main;
+import com.spectrasonic.NiiniiwiPerma.commands.PermaCommand;
 import lombok.Getter;
 
 @Getter
@@ -14,6 +15,6 @@ public class CommandManager {
     }
 
     private void registerCommands() {
-        // Register commands here
+        plugin.getAcfCommandManager().registerCommand(new PermaCommand(plugin));
     }
 }

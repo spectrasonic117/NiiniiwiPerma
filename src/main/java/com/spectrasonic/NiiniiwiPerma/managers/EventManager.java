@@ -1,6 +1,7 @@
 package com.spectrasonic.NiiniiwiPerma.managers;
 
 import com.spectrasonic.NiiniiwiPerma.Main;
+import com.spectrasonic.NiiniiwiPerma.listeners.MineAncientDebrisListener;
 import lombok.Getter;
 
 @Getter
@@ -14,7 +15,7 @@ public class EventManager {
     }
 
     private void registerEvents() {
-        // Register events here
+        plugin.getServer().getPluginManager().registerEvents(new MineAncientDebrisListener(plugin), plugin);
     }
 
 }

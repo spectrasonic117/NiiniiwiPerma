@@ -74,6 +74,13 @@
             <artifactId>adventure-platform-bukkit</artifactId>
             <version>4.4.1</version>
         </dependency>
+        
+        <!-- Command API (ACF) -->
+        <dependency>
+            <groupId>co.aikar</groupId>
+            <artifactId>acf-paper</artifactId>
+            <version>0.5.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -114,6 +121,16 @@
                     <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
                     <shadedArtifactAttached>true</shadedArtifactAttached>
                     <minimizeJar>true</minimizeJar>
+                    <relocations>
+                        <relocation>
+                            <pattern>co.aikar.commands</pattern>
+                            <shadedPattern>com.spectrasonic.acf</shadedPattern> <!-- Replace this -->
+                        </relocation>
+                        <relocation>
+                            <pattern>co.aikar.locales</pattern>
+                            <shadedPattern>com.spectrasonic.locales</shadedPattern> <!-- Replace this -->
+                        </relocation>
+                    </relocations>
                 </configuration>
                 <executions>
                     <execution>

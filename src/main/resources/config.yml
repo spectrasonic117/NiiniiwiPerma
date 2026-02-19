@@ -1,0 +1,15 @@
+# Configuración del plugin NiiniiwiPerma
+mechanics:
+    # Prevenir la minería de Ancient Debris (true = sí, false = no)
+    prevent-ancient-debris-mining: false
+
+messages:
+    ancient_debris_denied: "<#a11316>[✖] <#787878>No puedes minar <#a18100>Ancient Debris."
+    reload_success: "<green>[✔] <#787878>Configuración del plugin recargada exitosamente."
+    mineancient_enabled: "<green>[✔] <#787878>Ahora se puede puede Minar <#ff8d0a>Ancient Debris.<reset>"
+    mineancient_disabled: "<#a11316>[✖] <#787878>No se puede puede Minar <#a18100>Ancient Debris.<reset>"
+
+    version_header: ""
+    version_plugin_info: "<gold><bold>{plugin_name}</bold> <gray>v{plugin_version}</gray>"
+    version_author_info: "<yellow>Autor: <white>{plugin_authors}"
+    version_footer: ""
