@@ -21,18 +21,17 @@ public class MineAncientDebrisListener implements Listener {
         if (event.getBlock().getType() == Material.ANCIENT_DEBRIS) {
             // Obtener el valor de la configuración: true significa que está PREVENTIDO (no
             // se puede minar)
-            boolean preventMining = plugin.getConfig().getBoolean("mechanics.prevent-ancient-debris-mining", false);
-            
+            boolean preventMining = plugin.getConfigManager().getConfig().getBoolean("mechanics.can_player_mine_ancient_debris", false);
+
             if (preventMining) {
                 // Cancelar el evento para prevenir que se rompa el bloque
-                event.setCancelled(true);
-                
+                // event.setCancelled(true);
+
                 // Prevenir que se generen drops
                 event.setDropItems(false);
-                
+
                 // Enviar mensaje al jugador usando la clave de configuración
-                String message = plugin.getConfig().getString("messages.ancient_debris_denied", "<red>No puedes minar Ancient Debris.");
-                MessageUtils.sendMessage(event.getPlayer(), message);
+                MessageUtils.sendMessageFromKey(event.getPlayer(), "messages.ancient_debris_denied");
             }
         }
     }

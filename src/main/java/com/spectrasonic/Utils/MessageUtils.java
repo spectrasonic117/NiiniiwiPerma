@@ -30,7 +30,7 @@ public final class MessageUtils {
     private static final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     public static final String DIVIDER = "&8----------------------------------------";
-    public static final String PREFIX = "&8[&6RoleplayCore&8]&6 » ";
+    public static final String PREFIX = "&8[&cPerma&8]&6 &a» &r";
 
     // Alert Prefixes
     public static final String SUCCESS_PREFIX = "&a&l[✔]&a ";

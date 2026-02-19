@@ -1,14 +1,14 @@
 name: NiiniiwiPerma
+api: "1.20"
 version: "${version}"
 main: com.spectrasonic.NiiniiwiPerma.Main
 api-version: "1.20"
 authors: [Spectrasonic]
-depend: []
 commands:
-    perma:
-        description: Comando principal del plugin
-        usage: /<command>
-        aliases: [p]
+  perma:
+    description: Comando principal del plugin
+    usage: /<command>
+    aliases: [p]
 permissions:
   niiniiwipermanent.version:
     description: Permiso para ver la versión del plugin

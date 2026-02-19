@@ -4,6 +4,8 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import com.spectrasonic.NiiniiwiPerma.Main;
 import com.spectrasonic.Utils.MessageUtils;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.command.CommandSender;
 
 @CommandAlias("perma")
@@ -24,37 +26,23 @@ public class PermaCommand extends BaseCommand {
         String author = plugin.getDescription().getAuthors().isEmpty() ? "Unknown"
                 : String.join(", ", plugin.getDescription().getAuthors());
 
-        // Mostrar información con formato bonito usando mensajes de la configuración
-        String header = plugin.getConfig().getString("messages.version_header", "");
-        if (!header.isEmpty()) {
-            MessageUtils.sendMessage(sender, header);
-        }
+        // Mostrar información del Plugin
+        TagResolver placeholders = TagResolver.builder()
+                .resolver(Placeholder.parsed("plugin_name", pluginName))
+                .resolver(Placeholder.parsed("plugin_version", version))
+                .resolver(Placeholder.parsed("plugin_authors", author))
+                .build();
 
-        String pluginInfo = plugin.getConfig()
-                .getString("messages.version_plugin_info",
-                        "<gold><bold>{plugin_name}</bold> <gray>v{plugin_version}</gray>")
-                .replace("{plugin_name}", pluginName)
-                .replace("{plugin_version}", version);
-        MessageUtils.sendMessage(sender, pluginInfo);
-
-        String authorInfo = plugin.getConfig()
-                .getString("messages.version_author_info", "<yellow>Autor: <white>{plugin_authors}")
-                .replace("{plugin_authors}", author);
-        MessageUtils.sendMessage(sender, authorInfo);
-
-        String footer = plugin.getConfig().getString("messages.version_footer", "");
-        if (!footer.isEmpty()) {
-            MessageUtils.sendMessage(sender, footer);
-        }
+        MessageUtils.sendMessage(sender, "messages.version_plugin_info", placeholders);
+        MessageUtils.sendMessage(sender, "messages.version_author_info", placeholders);
     }
 
     @Subcommand("reload")
     @Description("Recarga la configuración del plugin")
     @CommandPermission("niiniiwipermanent.reload")
     public void onReload(CommandSender sender) {
-        plugin.reloadConfig();
-        String message = plugin.getConfig().getString("messages.reload_success");
-        MessageUtils.sendMessage(sender, message);
+        plugin.getConfigManager().loadConfig();
+        MessageUtils.sendMessageFromKey(sender, "messages.reload_success");
     }
 
     @Subcommand("mechanic")
@@ -68,15 +56,11 @@ public class PermaCommand extends BaseCommand {
         @Description("Habilita o deshabilita la minería de Ancient Debris")
         @CommandPermission("niiniiwipermanent.mechanic.mineancient")
         public void onMineAncient(CommandSender sender, boolean enabled) {
-            plugin.getConfig().set("mechanics.prevent-ancient-debris-mining", !enabled);
-            plugin.saveConfig();
+            plugin.getConfigManager().getConfig().set("mechanics.can_player_mine_ancient_debris", !enabled);
+            plugin.getConfigManager().saveConfig();
 
             String messageKey = enabled ? "messages.mineancient_enabled" : "messages.mineancient_disabled";
-            String message = plugin.getConfig().getString(messageKey,
-                    enabled ? "<green>[✔] <#787878>Ahora se puede puede Minar <#ff8d0a>Ancient Debris.<reset>"
-                            : "<#a11316>[✖] <#787878>No se puede puede Minar <#a18100>Ancient Debris.<reset>");
-
-            MessageUtils.sendMessage(sender, message);
+            MessageUtils.sendMessageFromKey(sender, messageKey);
         }
     }
 }
